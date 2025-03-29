@@ -73,3 +73,14 @@ pattern = "love.graphics.setShader( G.SHADERS['CRT'])"
 position = "at"
 payload = ''
 match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = "function create_keyboard_input(args)"
+position = "after"
+payload = '''
+	--bandaid fix for having an actual ui element but hey look at that we use the built in keyboard instead of uh...
+	love.keyboard.setTextInput(true) do return {n=G.UIT.ROOT, config={align = "cm", padding = 15, r = 0.1, colour = {G.C.GREY[1], G.C.GREY[2], G.C.GREY[3],0.7}}, nodes={}} end
+'''
+match_indent = true
